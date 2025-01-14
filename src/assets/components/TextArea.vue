@@ -5,6 +5,7 @@
         v-for="(button, index) in buttons"
         :key="index"
         class="text-area-btn"
+        :class="{ active: button.action === 'bold' && isBoldActive }"
         @click="applyStyle(button.action)"
       >
         {{ button.text }}
@@ -23,6 +24,7 @@
 import { ref } from "vue";
 
 const editorRef = ref(null);
+const isBoldActive = ref(false);
 
 const buttons = [
   { text: "텍스트 굵게", action: "bold" },
@@ -46,13 +48,17 @@ const applyStyle = (action) => {
     const range = selection.getRangeAt(0);
     const selectedText = range.toString();
 
-    if (!selectedText) return;
-
     switch (action) {
       case "bold":
-        document.execCommand("bold", false, null);
+        if (selectedText) {
+          document.execCommand("bold", false, null);
+        } else {
+          isBoldActive.value = !isBoldActive.value;
+          document.execCommand("bold", false, null);
+        }
         break;
       case "largeText": {
+        if (!selectedText) return;
         const span = document.createElement("span");
         span.style.fontSize = "1.25rem";
         const fragment = range.extractContents();
@@ -64,6 +70,7 @@ const applyStyle = (action) => {
         break;
       }
       case "largerText": {
+        if (!selectedText) return;
         const span = document.createElement("span");
         span.style.fontSize = "1.5rem";
         const fragment = range.extractContents();
@@ -108,6 +115,11 @@ const applyStyle = (action) => {
 
 .text-area-btn:hover {
   background-color: #f5f5f5;
+}
+
+.text-area-btn.active {
+  background-color: #eebbbb;
+  border-color: #ffaaaa;
 }
 
 .editor {
