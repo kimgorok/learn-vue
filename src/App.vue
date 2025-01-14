@@ -144,12 +144,17 @@
       </div>
     </div>
   </div>
+
+  <div class="container p-4">
+    <TextArea />
+  </div>
 </template>
 
 <script setup>
 import { onMounted, ref, reactive } from "vue";
 import { Timeline } from "vis-timeline/standalone";
 import "vis-timeline/styles/vis-timeline-graph2d.css";
+import TextArea from "./assets/components/TextArea.vue";
 
 const timeline = ref(null);
 const timelineInstance = ref(null);
@@ -469,5 +474,10 @@ onMounted(() => {
   background-color: #f3f4f6;
   padding: 4px;
   font-weight: bold;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
 }
 </style>
