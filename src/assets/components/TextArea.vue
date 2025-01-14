@@ -6,7 +6,7 @@
         :key="index"
         class="text-area-btn"
         :class="{ active: button.action === 'bold' && isBoldActive }"
-        @click="applyStyle(button.action)"
+        @mousedown.prevent="applyStyle(button.action)"
       >
         {{ button.text }}
       </button>
@@ -33,9 +33,8 @@ const buttons = [
 ];
 
 const handleKeyDown = (e) => {
-  // Ctrl + B (or Cmd + B for Mac)
   if ((e.ctrlKey || e.metaKey) && e.key === "b") {
-    e.preventDefault(); // 브라우저 기본 동작 방지
+    e.preventDefault();
     applyStyle("bold");
   }
 };
@@ -50,11 +49,12 @@ const applyStyle = (action) => {
 
     switch (action) {
       case "bold":
-        if (selectedText) {
-          document.execCommand("bold", false, null);
-        } else {
-          isBoldActive.value = !isBoldActive.value;
-          document.execCommand("bold", false, null);
+        isBoldActive.value = !isBoldActive.value;
+        document.execCommand("bold", false, null);
+
+        // 선택된 텍스트가 없을 경우에도 포커스 유지
+        if (!selectedText && editorRef.value) {
+          editorRef.value.focus();
         }
         break;
       case "largeText": {
@@ -64,7 +64,6 @@ const applyStyle = (action) => {
         const fragment = range.extractContents();
         span.appendChild(fragment);
         range.insertNode(span);
-        // 선택 상태 유지
         selection.removeAllRanges();
         selection.addRange(range);
         break;
@@ -76,7 +75,6 @@ const applyStyle = (action) => {
         const fragment = range.extractContents();
         span.appendChild(fragment);
         range.insertNode(span);
-        // 선택 상태 유지
         selection.removeAllRanges();
         selection.addRange(range);
         break;
