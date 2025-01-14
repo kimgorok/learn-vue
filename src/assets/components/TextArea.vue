@@ -27,9 +27,8 @@ const editorRef = ref(null);
 
 const buttons = [
   { text: "텍스트 굵게", action: "bold" },
-  { text: "텍스트 h1 사이즈", action: "h1" },
-  { text: "텍스트 h2 사이즈", action: "h2" },
-  { text: "텍스트 h3 사이즈", action: "h3" },
+  { text: "텍스트 크게", action: "sizeUp" },
+  { text: "텍스트 작게", action: "sizeDown" },
 ];
 
 const handleKeyDown = (e) => {
@@ -50,21 +49,8 @@ const applyStyle = (action) => {
       case "bold":
         document.execCommand("bold", false, null);
         break;
-      case "h1":
-        wrap("h1");
-        break;
-      case "h2":
-        wrap("h2");
-        break;
-      case "h3":
-        wrap("h3");
-        break;
     }
   }
-};
-
-const wrap = (tag) => {
-  document.execCommand("formatBlock", false, tag);
 };
 </script>
 
@@ -107,23 +93,6 @@ const wrap = (tag) => {
 }
 
 /* 에디터 내부 스타일 */
-.editor h1 {
-  font-size: 2em;
-  font-weight: bold;
-  margin: 0.67em 0;
-}
-
-.editor h2 {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 0.83em 0;
-}
-
-.editor h3 {
-  font-size: 1.17em;
-  font-weight: bold;
-  margin: 1em 0;
-}
 
 .editor b,
 .editor strong {
