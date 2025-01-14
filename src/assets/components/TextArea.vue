@@ -14,7 +14,6 @@
       ref="editorRef"
       class="editor"
       contenteditable="true"
-      @input="handleInput"
       @keydown="handleKeyDown"
     ></div>
   </div>
@@ -27,8 +26,8 @@ const editorRef = ref(null);
 
 const buttons = [
   { text: "텍스트 굵게", action: "bold" },
-  { text: "텍스트 크게", action: "sizeUp" },
-  { text: "텍스트 작게", action: "sizeDown" },
+  { text: "큰 텍스트", action: "largeText" },
+  { text: "더 큰 텍스트", action: "largerText" },
 ];
 
 const handleKeyDown = (e) => {
@@ -40,16 +39,44 @@ const handleKeyDown = (e) => {
 };
 
 const applyStyle = (action) => {
-  const selection = window.getSelection();
-  const range = selection.getRangeAt(0);
-  const selectedText = range.toString();
+  try {
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return;
 
-  if (selectedText) {
+    const range = selection.getRangeAt(0);
+    const selectedText = range.toString();
+
+    if (!selectedText) return;
+
     switch (action) {
       case "bold":
         document.execCommand("bold", false, null);
         break;
+      case "largeText": {
+        const span = document.createElement("span");
+        span.style.fontSize = "1.25rem";
+        const fragment = range.extractContents();
+        span.appendChild(fragment);
+        range.insertNode(span);
+        // 선택 상태 유지
+        selection.removeAllRanges();
+        selection.addRange(range);
+        break;
+      }
+      case "largerText": {
+        const span = document.createElement("span");
+        span.style.fontSize = "1.5rem";
+        const fragment = range.extractContents();
+        span.appendChild(fragment);
+        range.insertNode(span);
+        // 선택 상태 유지
+        selection.removeAllRanges();
+        selection.addRange(range);
+        break;
+      }
     }
+  } catch (error) {
+    console.error("Error applying style:", error);
   }
 };
 </script>
@@ -91,8 +118,6 @@ const applyStyle = (action) => {
   line-height: 1.5;
   outline: none;
 }
-
-/* 에디터 내부 스타일 */
 
 .editor b,
 .editor strong {
