@@ -148,6 +148,10 @@
   <div class="container p-4">
     <TextArea />
   </div>
+
+  <div class="container p-4">
+    <LoginForm />
+  </div>
 </template>
 
 <script setup>
@@ -155,6 +159,7 @@ import { onMounted, ref, reactive } from "vue";
 import { Timeline } from "vis-timeline/standalone";
 import "vis-timeline/styles/vis-timeline-graph2d.css";
 import TextArea from "./assets/components/TextArea.vue";
+import LoginForm from "./assets/components/LoginForm.vue";
 
 const timeline = ref(null);
 const timelineInstance = ref(null);
