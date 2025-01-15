@@ -41,59 +41,54 @@ const handleKeyDown = (e) => {
 };
 
 const applyStyle = (action) => {
-  try {
-    const selection = window.getSelection();
-    if (!selection.rangeCount) return;
+  const selection = window.getSelection(); // 사용자가 현재 선택한 텍스트 범위
+  // if (!selection.rangeCount) return;
+  const range = selection.getRangeAt(0); // 선택된 범위 저장
+  const selectedText = range.toString(); // 선택 범위 텍스트 내용을 문자열로 반환
 
-    const range = selection.getRangeAt(0);
-    const selectedText = range.toString();
+  switch (action) {
+    case "bold":
+      isBoldActive.value = !isBoldActive.value;
+      document.execCommand("bold", false, null);
 
-    switch (action) {
-      case "bold":
-        isBoldActive.value = !isBoldActive.value;
-        document.execCommand("bold", false, null);
-
-        // 선택된 텍스트가 없을 경우에도 포커스 유지
-        if (!selectedText && editorRef.value) {
-          editorRef.value.focus();
-        }
-        break;
-      case "normalText": {
-        // if (!selectedText) return;
-        const span = document.createElement("span");
-        span.style.fontSize = "1rem";
-        const fragment = range.extractContents();
-        span.appendChild(fragment);
-        range.insertNode(span);
-        selection.removeAllRanges();
-        selection.addRange(range);
-        break;
+      // 선택된 텍스트가 없을 경우에도 포커스 유지
+      if (!selectedText && editorRef.value) {
+        editorRef.value.focus();
       }
-      case "largeText": {
-        // if (!selectedText) return;
-        const span = document.createElement("span");
-        span.style.fontSize = "1.25rem";
-        const fragment = range.extractContents();
-        span.appendChild(fragment);
-        range.insertNode(span);
-        selection.removeAllRanges();
-        selection.addRange(range);
-        break;
-      }
-      case "largerText": {
-        // if (!selectedText) return;
-        const span = document.createElement("span");
-        span.style.fontSize = "1.5rem";
-        const fragment = range.extractContents();
-        span.appendChild(fragment);
-        range.insertNode(span);
-        selection.removeAllRanges();
-        selection.addRange(range);
-        break;
-      }
+      break;
+    case "normalText": {
+      // if (!selectedText) return;
+      const span = document.createElement("span"); // 새로운 span 요소 생성
+      span.style.fontSize = "1rem";
+      const fragment = range.extractContents(); // 선택된 범위의 내용을 추출
+      span.appendChild(fragment); // 추출한 내용을 span 요소에 추가
+      range.insertNode(span); // 새로운 span 요소를 선택된 범위에 삽입
+      // selection.removeAllRanges(); // 선택 범위 초기화
+      // selection.addRange(range); // 새로운 선택 범위 설정
+      break;
     }
-  } catch (error) {
-    console.error("Error applying style:", error);
+    case "largeText": {
+      // if (!selectedText) return;
+      const span = document.createElement("span");
+      span.style.fontSize = "1.25rem";
+      const fragment = range.extractContents();
+      span.appendChild(fragment);
+      range.insertNode(span);
+      // selection.removeAllRanges();
+      // selection.addRange(range);
+      break;
+    }
+    case "largerText": {
+      // if (!selectedText) return;
+      const span = document.createElement("span");
+      span.style.fontSize = "1.5rem";
+      const fragment = range.extractContents();
+      span.appendChild(fragment);
+      range.insertNode(span);
+      // selection.removeAllRanges();
+      // selection.addRange(range);
+      break;
+    }
   }
 };
 </script>
