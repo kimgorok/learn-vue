@@ -16,7 +16,7 @@
       class="editor"
       contenteditable="true"
       @keydown="handleKeyDown"
-    ></div>
+    />
   </div>
 </template>
 
@@ -28,6 +28,7 @@ const isBoldActive = ref(false);
 
 const buttons = [
   { text: "텍스트 굵게", action: "bold" },
+  { text: "기본 텍스트", action: "normalText" },
   { text: "큰 텍스트", action: "largeText" },
   { text: "더 큰 텍스트", action: "largerText" },
 ];
@@ -57,8 +58,19 @@ const applyStyle = (action) => {
           editorRef.value.focus();
         }
         break;
+      case "normalText": {
+        // if (!selectedText) return;
+        const span = document.createElement("span");
+        span.style.fontSize = "1rem";
+        const fragment = range.extractContents();
+        span.appendChild(fragment);
+        range.insertNode(span);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        break;
+      }
       case "largeText": {
-        if (!selectedText) return;
+        // if (!selectedText) return;
         const span = document.createElement("span");
         span.style.fontSize = "1.25rem";
         const fragment = range.extractContents();
@@ -69,7 +81,7 @@ const applyStyle = (action) => {
         break;
       }
       case "largerText": {
-        if (!selectedText) return;
+        // if (!selectedText) return;
         const span = document.createElement("span");
         span.style.fontSize = "1.5rem";
         const fragment = range.extractContents();
