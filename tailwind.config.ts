@@ -3,9 +3,8 @@ import type { Config } from 'tailwindcss';
 const config: Config = {
   darkMode: 'class',
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './index.html',
+    './src/**/*.{vue,js,ts,jsx,tsx}', // Vue 파일 경로로 수정
   ],
   theme: {
     screens: {
@@ -27,13 +26,14 @@ const config: Config = {
           4: '#F3F3F3',
           5: '#D9D9D9',
         },
-        blue: {},
-        white: {},
-        primary: {},
-        yellow: {},
-        pink: {},
-        red: {},
-        green: {},
+        dark: {
+          bg: '#121212',
+          surface: '#1E1E1E',
+          border: '#2E2E2E',
+          text: {
+            primary: '#FFFFFF',
+          },
+        },
       },
     },
   },

@@ -1,10 +1,18 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div class="bg-red-100 dark:bg-dark-bg text-black-0 dark:text-dark-text-primary transition-colors">
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav>
+
+    <DarkModeToggle />
+    <router-view />
+  </div>
 </template>
+
+<script setup lang="ts">
+import DarkModeToggle from './components/DarkModeToggle.vue';
+</script>
 
 <style>
 #app {
@@ -12,6 +20,5 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 </style>

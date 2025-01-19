@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <p className="text-xl font-extrabold">안녕</p>
+    <p class="text-xl font-extrabold">안녕</p>
   </div>
 </template>
 
