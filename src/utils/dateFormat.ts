@@ -1,4 +1,4 @@
-// 2025-01-20T05:34:02 -> 2025년 01월 20일
+// 2025-01-20T05:34:02 -> 2025/01/20
 export const formatSlashDate = (dateString: string): string => {
   const date = new Date(dateString);
   const year = date.getFullYear();
