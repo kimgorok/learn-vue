@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import DarkModeToggle from './components/DarkModeToggle.vue';
+import DarkModeToggle from './components/common/DarkModeToggle.vue';
 </script>
 
 <style>
