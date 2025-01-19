@@ -2,22 +2,25 @@ module.exports = {
   root: true,
   env: {
     node: true,
-    'vue/setup-compiler-macros': true,
+    'vue/setup-compiler-macros': true, // Vue 3 <script setup> 매크로 지원
   },
+  // 전역 변수 설정 (Vue 3의 <script setup> 매크로들)
   globals: {
-    defineProps: 'readonly',
-    defineEmits: 'readonly',
-    defineExpose: 'readonly',
-    withDefaults: 'readonly',
+    defineProps: 'readonly', // props 정의 매크로
+    defineEmits: 'readonly', // emit 정의 매크로
+    defineExpose: 'readonly', // 컴포넌트 노출 매크로
+    withDefaults: 'readonly', // props 기본값 설정 매크로
   },
+  // ESLint 설정을 확장
   extends: [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/typescript/recommended',
-    'plugin:prettier/recommended',
+    'plugin:vue/vue3-essential', // Vue 3 필수 규칙
+    'eslint:recommended', // ESLint 추천 규칙
+    '@vue/typescript/recommended', // TypeScript 추천 규칙
+    'plugin:prettier/recommended', // Prettier 통합 규칙
   ],
+  // 파서 옵션 설정
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2020, // ECMAScript 2020 문법 사용
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
