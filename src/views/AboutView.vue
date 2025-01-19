@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue'; // Vue의 반응형 시스템과 생명주기 훅을 가져옴
 import type { User } from '@/types/user';
 import { userApi } from '@/services/userService/userService'; // 유저 관련 서비스 함수 import
+import { TermCheckIcon } from '@/assets/icons/path';
+import SvgIcon from '@/components/common/SvgIcon.vue';
 
 const users = ref<User[]>([]); // 사용자 목록을 저장할 반응형 배열
 const loading = ref(false);
@@ -38,7 +40,22 @@ onMounted(() => {
 
 <template>
   <div class="bg-white dark:bg-dark-bg text-black-0 dark:text-dark-text-primary">
-    <p class="text-gray-0 dark:text-dark-text-secondary">유저 목록 테스트 페이지</p>
+    <p class="text-gray-0 dark:text-dark-text-secondary flex-center">
+      유저 목록 테스트 페이지
+      <SvgIcon
+        :icon="{
+          ...TermCheckIcon,
+          fill: 'none',
+          options: {
+            stroke: '#22c55e',
+            strokeWidth: 10,
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+          },
+        }"
+        class="w-8 h-8"
+      />
+    </p>
   </div>
 
   <div class="p-4">
