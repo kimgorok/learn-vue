@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-red-100 dark:bg-dark-bg text-black-0 dark:text-dark-text-primary transition-colors">
+  <div class="bg-red-100 dark:bg-black-0 text-black-0 dark:text-white-0 transition-colors">
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
