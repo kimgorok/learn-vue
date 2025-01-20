@@ -17,23 +17,34 @@ const config: Config = {
       colors: {
         black: {
           0: '#000000',
+          1: '#0C0C0C',
+          2: '#313030',
         },
         gray: {
-          0: '#6E6E82',
-          1: '#9FA6B2',
-          2: '#D2D2D2',
-          3: '#A6A6A6',
-          4: '#F3F3F3',
-          5: '#D9D9D9',
+          0: '#51525B',
+          1: '#959393',
         },
-        dark: {
-          bg: '#121212',
-          surface: '#1E1E1E',
-          border: '#2E2E2E',
-          text: {
-            primary: '#FFFFFF',
-          },
+        primary: {
+          0: '#232D64',
+          1: '#223F59',
         },
+        white: {
+          0: '#FFFFFF',
+          1: '#F9F7FD',
+          2: '#FAFAFA',
+        },
+        blue: {
+          0: '#2E2E48',
+          1: '#5D5D9D',
+        },
+        // dark: {
+        //   bg: '#121212',
+        //   surface: '#1E1E1E',
+        //   border: '#2E2E2E',
+        //   text: {
+        //     primary: '#FFFFFF',
+        //   },
+        // },
       },
     },
   },
