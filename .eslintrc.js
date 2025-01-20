@@ -4,12 +4,12 @@ module.exports = {
     node: true,
     'vue/setup-compiler-macros': true, // Vue 3 <script setup> 매크로 지원
   },
-  // 전역 변수 설정 (Vue 3의 <script setup> 매크로들)
+  // 전역 변수 설정 (Vue 3의 <script setup> 매크로들, 읽기 전용)
   globals: {
-    defineProps: 'readonly', // props 정의 매크로
-    defineEmits: 'readonly', // emit 정의 매크로
-    defineExpose: 'readonly', // 컴포넌트 노출 매크로
-    withDefaults: 'readonly', // props 기본값 설정 매크로
+    defineProps: 'readonly', // props 정의
+    defineEmits: 'readonly', // emit 정의
+    defineExpose: 'readonly', // 컴포넌트 외부 노출 속성 정의
+    withDefaults: 'readonly', // props 기본값 설정
   },
   // ESLint 설정을 확장
   extends: [
